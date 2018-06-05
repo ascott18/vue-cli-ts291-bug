@@ -1,19 +1,30 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import Vue from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
 
-export default {
+import { BaseFoo } from './imported-class'
+import * as Consts from './imported-const'
+
+class DerivedFoo extends BaseFoo<any> {
+  constructor() { super(Consts.Foo) }
+}
+
+export default Vue.extend({
   name: 'app',
   components: {
     HelloWorld
+  },
+  mounted() {
+    var fooInstance = new DerivedFoo()
   }
-}
+});
 </script>
 
 <style>
